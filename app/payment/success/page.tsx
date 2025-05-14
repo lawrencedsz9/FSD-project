@@ -14,33 +14,10 @@ export default function PaymentSuccessPage() {
 
   useEffect(() => {
     const verifyPayment = async () => {
-      const paymentId = searchParams.get('razorpay_payment_id');
-      const orderId = searchParams.get('razorpay_order_id');
-      const signature = searchParams.get('razorpay_signature');
-
-      if (!paymentId || !orderId || !signature) {
-        setVerificationStatus('error');
-        return;
-      }
-
+      // TODO: Implement payment verification
       try {
-        const response = await fetch('/api/razorpay/verify', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            razorpay_payment_id: paymentId,
-            razorpay_order_id: orderId,
-            razorpay_signature: signature,
-          }),
-        });
-
-        if (!response.ok) {
-          throw new Error('Payment verification failed');
-        }
-
-        // Clear the cart after successful payment
+        // Simulate payment verification
+        await new Promise(resolve => setTimeout(resolve, 2000));
         clearCart();
         setVerificationStatus('success');
       } catch (error) {
@@ -50,7 +27,7 @@ export default function PaymentSuccessPage() {
     };
 
     verifyPayment();
-  }, [searchParams, clearCart]);
+  }, [clearCart]);
 
   if (verificationStatus === 'loading') {
     return (

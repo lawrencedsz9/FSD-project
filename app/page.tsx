@@ -10,6 +10,9 @@ import TestimonialCard from "@/components/testimonial-card"
 import NewsletterForm from "@/components/newsletter-form"
 import { ArrowRight } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
+
+
 
 interface Product {
   _id: string;
@@ -150,10 +153,11 @@ export default function HomePage() {
             </p>
             <Link
               href="/products"
-              className="glass-button inline-flex items-center gap-2"
+              // className="glass-button inline-flex items-center gap-2"
             >
-              Shop Now
-              <ArrowRight className="w-5 h-5" />
+              {/* Shop Now
+              <ArrowRight className="w-5 h-5" /> */}
+            <InteractiveHoverButton>Shop Now</InteractiveHoverButton>
             </Link>
           </div>
         </div>

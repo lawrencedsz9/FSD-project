@@ -4,6 +4,7 @@ import "./globals.css";
 import Link from "next/link";
 import { ShoppingCart, User, Menu } from "lucide-react";
 import { CartProvider } from "./context/CartContext";
+import { SparklesText } from "@/components/magicui/sparkles-text";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,9 +28,11 @@ export default function RootLayout({
                 <div className="flex items-center">
                   <Link
                     href="/"
-                    className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent"
+                    className="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent"
                   >
-                    TRUSTCART
+                    {/* TRUSTCART
+                     */}
+                    <SparklesText>TRUSTCART</SparklesText>
                   </Link>
                 </div>
 
