@@ -4,9 +4,25 @@ import { useCart } from '../context/CartContext';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Trash2, Plus, Minus } from 'lucide-react';
+import { makePayment } from '../utils/razorpay';
+import { useState } from 'react';
 
 export default function CartPage() {
   const { items, removeItem, updateQuantity, total } = useCart();
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const handleCheckout = async () => {
+    try {
+      setIsProcessing(true);
+      const totalWithTax = total + Math.round(total * 0.18);
+      await makePayment(totalWithTax);
+    } catch (error) {
+      console.error('Checkout failed:', error);
+      // Handle error (show error message to user)
+    } finally {
+      setIsProcessing(false);
+    }
+  };
 
   if (items.length === 0) {
     return (
@@ -95,8 +111,12 @@ export default function CartPage() {
                   </div>
                 </div>
               </div>
-              <button className="glass-button w-full">
-                Proceed to Checkout
+              <button 
+                className="glass-button w-full"
+                onClick={handleCheckout}
+                disabled={isProcessing}
+              >
+                {isProcessing ? 'Processing...' : 'Proceed to Checkout'}
               </button>
               <Link href="/products" className="glass-button-outline w-full block text-center">
                 Continue Shopping
